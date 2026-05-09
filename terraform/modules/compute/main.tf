@@ -81,7 +81,7 @@ resource "aws_launch_template" "backend" {
 
   tag_specifications {
     resource_type = "instance"
-    tags = { Name = "${var.environment}-backend", Environment = var.environment }
+    tags          = { Name = "${var.environment}-backend", Environment = var.environment }
   }
 }
 

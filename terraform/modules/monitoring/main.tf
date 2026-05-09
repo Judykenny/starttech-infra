@@ -1,13 +1,13 @@
 resource "aws_cloudwatch_log_group" "backend" {
   name              = "/starttech/${var.environment}/backend"
   retention_in_days = 30
-  tags = { Environment = var.environment }
+  tags              = { Environment = var.environment }
 }
 
 resource "aws_cloudwatch_log_group" "frontend" {
   name              = "/starttech/${var.environment}/frontend"
   retention_in_days = 30
-  tags = { Environment = var.environment }
+  tags              = { Environment = var.environment }
 }
 
 resource "aws_iam_role" "ec2_cloudwatch" {
