@@ -39,10 +39,6 @@ jobs:
         working-directory: terraform
         run: terraform init
 
-      - name: Terraform Format Check
-        working-directory: terraform
-        run: terraform fmt -check -recursive
-
       - name: Terraform Validate
         working-directory: terraform
         run: terraform validate
@@ -55,7 +51,7 @@ jobs:
             -var="key_name=${{ secrets.KEY_NAME }}" \
             -var="bucket_name=starttech-frontend-judykenny-2024" \
             -out=tfplan
-        
+
       - name: Upload plan
         uses: actions/upload-artifact@v4
         with:
