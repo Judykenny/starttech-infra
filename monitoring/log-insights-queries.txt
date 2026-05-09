@@ -1,0 +1,37 @@
+# StartTech CloudWatch Log Insights Queries
+# Log Group: /starttech/production/backend
+
+# 1. All recent logs (last 100 entries)
+fields @timestamp, @message
+| sort @timestamp desc
+| limit 100
+
+# 2. Error logs only
+fields @timestamp, @message
+| filter @message like /ERROR|error|Error/
+| sort @timestamp desc
+| limit 50
+
+# 3. Health check requests
+fields @timestamp, @message
+| filter @message like /health/
+| sort @timestamp desc
+| limit 50
+
+# 4. Request count per minute
+fields @timestamp
+| stats count() as requests by bin(1m)
+| sort @timestamp desc
+
+# 5. Slow requests (over 1 second)
+fields @timestamp, @message
+| filter @message like /duration/
+| parse @message "duration=*" as duration
+| filter duration > 1000
+| sort @timestamp desc
+
+# 6. Unique IPs making requests
+fields @timestamp, @message
+| parse @message "from *" as client_ip
+| stats count() as requests by client_ip
+| sort requests desc

@@ -1,0 +1,48 @@
+{
+  "alarms": [
+    {
+      "name": "production-high-cpu",
+      "description": "Triggers scale-up when CPU exceeds 70%",
+      "metric": "CPUUtilization",
+      "namespace": "AWS/EC2",
+      "threshold": 70,
+      "comparison": "GreaterThanThreshold",
+      "evaluation_periods": 2,
+      "period": 120,
+      "action": "scale-up"
+    },
+    {
+      "name": "production-low-cpu",
+      "description": "Triggers scale-down when CPU drops below 30%",
+      "metric": "CPUUtilization",
+      "namespace": "AWS/EC2",
+      "threshold": 30,
+      "comparison": "LessThanThreshold",
+      "evaluation_periods": 2,
+      "period": 120,
+      "action": "scale-down"
+    },
+    {
+      "name": "production-alb-5xx-errors",
+      "description": "Alerts when ALB 5XX errors exceed 10 in 5 minutes",
+      "metric": "HTTPCode_Target_5XX_Count",
+      "namespace": "AWS/ApplicationELB",
+      "threshold": 10,
+      "comparison": "GreaterThanThreshold",
+      "evaluation_periods": 1,
+      "period": 300,
+      "action": "notify"
+    },
+    {
+      "name": "production-redis-high-cpu",
+      "description": "Alerts when Redis CPU exceeds 75%",
+      "metric": "CPUUtilization",
+      "namespace": "AWS/ElastiCache",
+      "threshold": 75,
+      "comparison": "GreaterThanThreshold",
+      "evaluation_periods": 2,
+      "period": 300,
+      "action": "notify"
+    }
+  ]
+}
