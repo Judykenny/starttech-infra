@@ -50,3 +50,4 @@ module "storage" {
   private_subnet_ids = module.networking.private_subnet_ids
   redis_sg_id        = module.networking.redis_sg_id
 }
+# Infrastructure managed by Terraform
